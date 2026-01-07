@@ -15,8 +15,9 @@
 # in the templates via {{ site.myvariable }}.
 title: ゲーム診察室:Susume
 email: b4qoo.vlrt@gmail.com
-description: 今のあなたに最もおすすめなゲームを処方します
-twitter_username: @B4Qoo
+description: 今のあなたにおすすめなゲームを処方します
+twitter_username: @B4qoo
+github_username: 
 minimal_mistakes_skin: default
 search: true
 
@@ -55,18 +56,22 @@ plugins:
 
 author:
   name   : "B4Qoo"
-  avatar : "assets/images/J50BjBef_400x400.jpg"
+  avatar : "/assets/images/J50BjBef_400x400.jpg"
   bio    : ""
   links:
+    - label: ""
+      icon: ""
+      url: ""
     - label: "X"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://x.com/B4qoo/"
+      url: "https://X.com/B4Qoo/"
+
 
 footer:
   links:
     - label: "X"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://x.com/B4qoo/"
+      url: "https://X.com/B4Qoo/"
 
 defaults:
   # _posts
