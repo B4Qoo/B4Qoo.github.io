@@ -1,5 +1,0 @@
-/* 全体の基準文字サイズを小さくする */
-html { font-size: 90%; }
-
-/* 念のため本文も明示 */
-body { font-size: 1rem; line-height: 1.7; }
