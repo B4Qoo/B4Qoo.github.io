@@ -1,0 +1,185 @@
+---
+# Only the main Sass file needs front matter (JekyllがSCSSとして処理するため)
+---
+
+@charset "utf-8";
+
+/* ここに “読み込み前に効かせたい” 変数上書きを書けます（任意）
+例：$link-color: #000;
+*/
+
+/* スキン → 本体 の順で読み込み */
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
+@import "minimal-mistakes";
+
+/* =========================
+   Paper-like base (Minimal Mistakes override)
+   ========================= */
+
+/* 全体の文字サイズ（好みで 88% / 85% へ） */
+html { font-size: 90%; }
+
+/* 背景と本文の読みやすさ */
+body {
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 背景を“紙の机”っぽく、本文は“紙”として浮かせる */
+.page__content,
+.archive,
+.home {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+  padding: 1.3rem 1.2rem;
+}
+
+/* 大きい画面では余白を少し増やす */
+@media (min-width: 64em) {
+  .page__content,
+  .archive,
+  .home {
+    padding: 1.7rem 1.8rem;
+  }
+}
+
+/* 見出し：紙のラベル/見出し帯っぽくする（本文には医療語を入れない方針でも見た目で世界観が出る） */
+.page__content h2 {
+  margin-top: 2.0rem;
+  padding: 0.55rem 0.8rem;
+  border-left: 6px solid rgba(0,0,0,0.22);
+  background: rgba(0,0,0,0.03);
+  border-radius: 10px;
+}
+
+.page__content h3 {
+  margin-top: 1.4rem;
+  padding-left: 0.7rem;
+  border-left: 4px solid rgba(0,0,0,0.18);
+}
+
+/* 段落間の余白を“紙の文章”らしく */
+.page__content p { margin: 0.85rem 0; }
+.page__content ul,
+.page__content ol { margin: 0.85rem 0 1.1rem; }
+.page__content li { margin: 0.35rem 0; }
+
+/* 引用を“メモ欄”っぽく（いま使っている注意書き > も自然に馴染む） */
+.page__content blockquote {
+  background: rgba(0,0,0,0.03);
+  border-left: 6px solid rgba(0,0,0,0.18);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+}
+
+/* タグ（chips）を紙ラベルっぽく（Minimal Mistakes の .page__taxonomy などに効く） */
+.page__taxonomy .page__taxonomy-item,
+.taxonomy__index a {
+  display: inline-block;
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.18);
+  background: rgba(255,255,255,0.75);
+  text-decoration: none;
+  margin: 0.15rem 0.25rem 0.15rem 0;
+}
+
+/* “私の所見”などの個人欄を、紙の追記欄として統一（任意で使う） */
+.rx-note {
+  background: rgba(255,255,255,0.86);
+  border: 1px dashed rgba(0,0,0,0.25);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  margin: 1.0rem 0 1.2rem;
+}
+
+.rx-note > :first-child { margin-top: 0; }
+.rx-note > :last-child { margin-bottom: 0; }
+
+/* 罫線っぽい区切り（任意：記事内の --- や hr を紙っぽく） */
+.page__content hr {
+  border: 0;
+  height: 1px;
+  background: rgba(0,0,0,0.14);
+  margin: 1.6rem 0;
+}
+/* =========================
+   Vintage paper look (add at end)
+   ========================= */
+
+/* 机（背景）：少し黄味 + 薄いムラ */
+body {
+  background:
+    radial-gradient(1200px 800px at 20% 10%, rgba(0,0,0,0.035), transparent 60%),
+    radial-gradient(900px 700px at 80% 30%, rgba(0,0,0,0.03), transparent 55%),
+    linear-gradient(to bottom, rgba(255,255,255,0.0), rgba(0,0,0,0.02));
+  background-color: #f3ead6; /* 古い紙の机っぽい下地 */
+}
+
+/* 本文の“紙”本体：黄味 + うっすら繊維/ムラ */
+.page__content,
+.archive,
+.home {
+  position: relative;
+  background: #fff7e6; /* 紙色 */
+  border: 1px solid rgba(0,0,0,0.10);
+  border-radius: 14px;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.10);
+}
+
+/* 紙の質感（疑似）：細かいムラと薄い罫線 */
+.page__content::before,
+.archive::before,
+.home::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 14px;
+
+  /* 1) 繊維っぽいムラ  2) 薄い罫線（好みで消せる） */
+  background:
+    radial-gradient(900px 600px at 10% 20%, rgba(0,0,0,0.030), transparent 55%),
+    radial-gradient(700px 500px at 90% 70%, rgba(0,0,0,0.025), transparent 55%),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.035) 0px,
+      rgba(0,0,0,0.035) 1px,
+      transparent 1px,
+      transparent 28px
+    );
+
+  opacity: 0.35; /* 強すぎるなら 0.20〜0.30 へ */
+}
+
+/* 見出し：紙の見出し帯を“少し古い印刷物”っぽく */
+.page__content h2 {
+  background: rgba(0,0,0,0.045);
+  border-left: 6px solid rgba(0,0,0,0.25);
+}
+
+.page__content h3 {
+  border-left: 4px solid rgba(0,0,0,0.22);
+}
+
+/* 引用：メモ欄っぽく少し濃いめ */
+.page__content blockquote {
+  background: rgba(0,0,0,0.04);
+  border-left: 6px solid rgba(0,0,0,0.22);
+}
+
+/* 個人メモ欄：追記の紙片っぽく */
+.rx-note {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px dashed rgba(0,0,0,0.28);
+}
+
+/* タグ：紙ラベル感を少し強める */
+.page__taxonomy .page__taxonomy-item,
+.taxonomy__index a {
+  background: rgba(255,255,255,0.55);
+  border-color: rgba(0,0,0,0.22);
+}
+
