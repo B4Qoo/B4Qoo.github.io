@@ -1,0 +1,104 @@
+---
+layout: default
+---
+
+{% include page__hero.html %}
+
+<div id="main" role="main">
+  {% include sidebar.html %}
+
+  <div class="archive home">
+
+    {%- comment -%}
+      タブ定義：必要ならここにカテゴリを追加/削除
+    {%- endcomment -%}
+    {% assign rx_tabs = "game,manga,movie,music" | split: "," %}
+    {% assign rx_labels = "ゲーム,マンガ,映画,音楽" | split: "," %}
+
+    <nav class="rx-tabs" aria-label="カテゴリー切り替え">
+      {% for c in rx_tabs %}
+        {% assign label = rx_labels[forloop.index0] %}
+        <button
+          type="button"
+          class="rx-tab"
+          data-rx-target="{{ c }}"
+          aria-controls="rx-panel-{{ c }}"
+          aria-selected="false"
+        >
+          {{ label }}
+        </button>
+      {% endfor %}
+    </nav>
+
+    {% for c in rx_tabs %}
+      {% assign posts_in_cat = site.categories[c] | sort: "date" | reverse %}
+
+      <section
+        id="rx-panel-{{ c }}"
+        class="rx-panel"
+        data-rx-panel="{{ c }}"
+        aria-hidden="true"
+      >
+        {% if posts_in_cat and posts_in_cat.size > 0 %}
+          {% for post in posts_in_cat limit: 20 %}
+            {% include archive-single.html type=page.entries_layout %}
+          {% endfor %}
+
+          {% if posts_in_cat.size > 20 %}
+            <p class="rx-more">
+              <a href="{{ site.baseurl }}/categories/#{{ c | uri_escape }}">もっと見る（カテゴリ一覧へ）</a>
+            </p>
+          {% endif %}
+        {% else %}
+          <p>このカテゴリにはまだ記事がありません。</p>
+        {% endif %}
+      </section>
+    {% endfor %}
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var tabs = document.querySelectorAll('.rx-tab');
+  var panels = document.querySelectorAll('.rx-panel');
+
+  function activate(key) {
+    tabs.forEach(function (t) {
+      var selected = (t.getAttribute('data-rx-target') === key);
+      t.classList.toggle('is-active', selected);
+      t.setAttribute('aria-selected', selected ? 'true' : 'false');
+    });
+
+    panels.forEach(function (p) {
+      var show = (p.getAttribute('data-rx-panel') === key);
+      p.style.display = show ? '' : 'none';
+      p.setAttribute('aria-hidden', show ? 'false' : 'true');
+    });
+
+    try { localStorage.setItem('rx_home_tab', key); } catch (e) {}
+  }
+
+  function initialKey() {
+    var hash = (location.hash || '').replace('#', '');
+    if (hash) return hash;
+
+    try {
+      var saved = localStorage.getItem('rx_home_tab');
+      if (saved) return saved;
+    } catch (e) {}
+
+    return 'game';
+  }
+
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      var key = t.getAttribute('data-rx-target');
+      activate(key);
+      history.replaceState(null, '', '#' + key);
+    });
+  });
+
+  activate(initialKey());
+})();
+</script>
