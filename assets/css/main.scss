@@ -182,4 +182,38 @@ body {
   background: rgba(255,255,255,0.55);
   border-color: rgba(0,0,0,0.22);
 }
+/* =========================
+   Home category tabs
+   ========================= */
+
+.rx-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0 0 1.0rem;
+}
+
+.rx-tab {
+  appearance: none;
+  border: 1px solid rgba(0,0,0,0.22);
+  background: rgba(255,255,255,0.55);
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.95em;
+  cursor: pointer;
+  line-height: 1.2;
+}
+
+.rx-tab.is-active {
+  background: rgba(0,0,0,0.06);
+  border-color: rgba(0,0,0,0.30);
+}
+
+.rx-panel {
+  /* JSで切替。初期はJSがdisplayを制御 */
+}
+
+.rx-more {
+  margin-top: 1.0rem;
+}
 
