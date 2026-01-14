@@ -13,9 +13,9 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: "ゲーム診察室:Susume"
+title: "エンタメ診察室:Susume"
 email: "b4qoo.vlrt@gmail.com"
-description: "今のあなたにおすすめなゲームを処方します"
+description: "今のあなたにおすすめなエンタメを処方します"
 twitter_username: "@B4qoo"
 github_username: 
 minimal_mistakes_skin: default
