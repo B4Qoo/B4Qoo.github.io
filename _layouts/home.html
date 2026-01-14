@@ -41,8 +41,9 @@ layout: default
       >
         {% if posts_in_cat and posts_in_cat.size > 0 %}
           {% for post in posts_in_cat limit: 20 %}
-            {% include archive-single.html type=page.entries_layout %}
+            {% include archive-single.html type=page.entries_layout post=post %}
           {% endfor %}
+
 
           {% if posts_in_cat.size > 20 %}
             <p class="rx-more">
